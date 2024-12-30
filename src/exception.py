@@ -1,5 +1,5 @@
 import sys
-import logging
+from src.logger import logging
 
 def error_message_detail(error, error_detail: sys):
     # Extract the exception type, value, and traceback using sys.exc_info()
@@ -26,20 +26,20 @@ class CustomException(Exception):
         # Return the detailed error message as a string
         return self.error_message
 
-# Practice block
-if __name__ == "__main__":
-    # Set up logging configuration
-    logging.basicConfig(level=logging.INFO)  # Configure logging to show INFO level messages
+# # # Practice block
+# if __name__ == "__main__":
+#     # Set up logging configuration
+#     logging.basicConfig(level=logging.INFO)  # Configure logging to show INFO level messages
 
-    try:
-        # Simulating a division by zero error
-        a = 1 / 0  # Division by zero
-    except Exception as e:
-        # Log the exception message
-        logging.info("Divide by Zero error occurred")
+#     try:
+#         # Simulating a division by zero error
+#         a = 1 / 0  # Division by zero
+#     except Exception as e:
+#         # Log the exception message
+#         logging.info("Divide by Zero error occurred")
         
-        # Raise the custom exception with the original exception and sys for traceback details
-        raise CustomException(e, sys)
+#         # Raise the custom exception with the original exception and sys for traceback details
+#         raise CustomException(e, sys)
 
 
     
