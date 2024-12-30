@@ -3,6 +3,7 @@ pandas
 scikit-learn
 matplotlib
 seaborn
+sys
 -e .
 
 # -e . function is automatically setup.py
