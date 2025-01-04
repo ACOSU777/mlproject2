@@ -9,6 +9,8 @@ from dataclasses import dataclass
 
 from src.components.data_transformation import DataTransformation
 from src.components.data_transformation import DataTransformationConfig
+from src.components.model_trainer import ModelTrainerConfig
+from src.components.model_trainer import ModelTrainer
 
 @dataclass # check the function of decorator @ & dataclass, and class function, if only define the variable, we could just use dataclass. If multifunction,it's better to have constructure here
 class DataIngestionConfig:
@@ -46,9 +48,13 @@ class DataIngestion:
             raise CustomException(e, sys)
 
 
+# Below is for testing
 if __name__=='__main__':
     obj=DataIngestion()
     train_data, test_data=obj.initiate_data_ingestion()
 
     data_transformation=DataTransformation()
-    data_transformation.initiate_data_transformation(train_data, test_data)
+    train_arr,test_arr,_= data_transformation.initiate_data_transformation(train_data, test_data)
+
+    modeltrainer=ModelTrainer()
+    print(modeltrainer.initiate_model_trainer(train_arr, test_arr))
