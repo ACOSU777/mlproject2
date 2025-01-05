@@ -29,7 +29,7 @@ from src.utils import (save_object, evaluate_models)
 
 @dataclass
 class ModelTrainerConfig:
-    train_model_file_path=os.path.join("artifacts", "model.pk1")
+    trained_model_file_path=os.path.join("artifacts","model.pkl")
 
 class ModelTrainer:
     def __init__(self):
@@ -109,7 +109,7 @@ class ModelTrainer:
             logging.info(f"Best found model on both raining and testing dataset!")
 
             save_object(
-                file_path=self.model_trainer_config.train_model_file_path,
+                file_path=self.model_trainer_config.trained_model_file_path,
                 obj = best_model
 
             )
