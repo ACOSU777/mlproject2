@@ -1,3 +1,5 @@
+# For AWS deployment purpose
+
 import pickle
 from flask import Flask, request, render_template
 import numpy as np
@@ -41,4 +43,4 @@ def predict_datapoint():
 
 
 if __name__=="__main__": #in order to run the APP
-    app.run(host="0.0.0.0",debug=True) # remove the debug=True once we deploy it to server
+    app.run(host="0.0.0.0") # remove the debug=True once we deploy it to server
