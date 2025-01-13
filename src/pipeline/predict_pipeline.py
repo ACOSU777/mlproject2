@@ -1,4 +1,5 @@
 import sys
+import os
 import pandas as pd
 from src.exception import CustomException
 from src.utils import load_object
@@ -11,15 +12,27 @@ class PredictPipeline:
     
     def predict(self,features):
          try:
-            model_path='artifacts\model.pkl'
-            preprocessor_path='artifacts\preprocessor.pkl'
-            model=load_object(file_path=model_path)
-            preprocessor=load_object(file_path=preprocessor_path)
-            data_scaled=preprocessor.transform(features)
-            preds=model.predict(data_scaled)
-            return preds
+            model_path = os.path.join('artifacts', 'model.pkl')
+            preprocessor_path = os.path.join('artifacts', 'preprocessor.pkl')
+            
+            try:
+                model = load_object(file_path=model_path)
+            except Exception as e:
+                raise CustomException(f"Error loading model: {str(e)}", sys)
+                
+            try:
+                preprocessor = load_object(file_path=preprocessor_path)
+            except Exception as e:
+                raise CustomException(f"Error loading preprocessor: {str(e)}", sys)
+                
+            try:
+                data_scaled = preprocessor.transform(features)
+                preds = model.predict(data_scaled)
+                return preds
+            except Exception as e:
+                raise CustomException(f"Error in prediction: {str(e)}", sys)
          except Exception as e:
-              raise CustomException(e,sys)
+              raise CustomException(f"Error in prediction pipeline: {str(e)}", sys)
 
 class CustomData:
     def __init__(  self,
